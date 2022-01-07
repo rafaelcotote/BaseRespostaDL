@@ -41,6 +41,28 @@ INSTALLED_APPS = [
     'app',
 ]
 
+MATERIAL_ADMIN_SITE = {
+    'HEADER':  ('BASE DE DADOS DÚVIDA LEGAL'),  # Admin site header
+    'TITLE':  ('IUS NATURA'),  # Admin site title
+    #'FAVICON':  'path/to/favicon',  # Admin site favicon (path to static should be specified)
+    'MAIN_BG_COLOR':  '#2881BA',  # Admin site main color, css color should be specified
+    'MAIN_HOVER_COLOR':  '#424448',  # Admin site main hover color, css color should be specified
+    'PROFILE_PICTURE':  'base/Foto.jpg',  # Admin site profile picture (path to static should be specified)
+    #'PROFILE_BG':  'path/to/image',  # Admin site profile background (path to static should be specified)
+    'LOGIN_LOGO':  'base/logo.PNG',  # Admin site logo on login page (path to static should be specified)
+    #'LOGOUT_BG':  'base/logo.PNG',  # Admin site background on login/logout pages (path to static should be specified)
+    'SHOW_THEMES':  False,  #  Show default admin themes button
+    'TRAY_REVERSE': True,  # Hide object-tools and additional-submit-line by default
+    'NAVBAR_REVERSE': True,  # Hide side navbar by default
+    'SHOW_COUNTS': True, # Show instances counts for each model
+    'APP_ICONS': {  # Set icons for applications(lowercase), including 3rd party apps, {'application_name': 'material_icon_name', ...}
+        'sites': 'send' 'app',
+    },
+    'MODEL_ICONS': {  # Set icons for models(lowercase), including 3rd party models, {'model_name': 'material_icon_name', ...}
+        'site': 'contact_mail',
+    }
+}
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -77,7 +99,7 @@ WSGI_APPLICATION = 'projetofinal.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'projetofinal',
+        'NAME': 'bancoprojeto',
         'USER': 'root',
         'PASSWORD': 'Rafa361528',
         'HOST': 'localhost',
@@ -102,28 +124,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-MATERIAL_ADMIN_SITE = {
-    'HEADER':  ('BASE DE DADOS DÚVIDA LEGAL'),  # Admin site header
-    'TITLE':  ('IUS NATURA'),  # Admin site title
-   # 'FAVICON':  'path/to/favicon',  # Admin site favicon (path to static should be specified)
-    'MAIN_BG_COLOR':  'color',  # Admin site main color, css color should be specified
-    'MAIN_HOVER_COLOR':  'color',  # Admin site main hover color, css color should be specified
-    'PROFILE_PICTURE':  'path/to/image',  # Admin site profile picture (path to static should be specified)
-   # 'PROFILE_BG':  'path/to/image',  # Admin site profile background (path to static should be specified)
-    'LOGIN_LOGO':  'path/to/image',  # Admin site logo on login page (path to static should be specified)
-  #  'LOGOUT_BG':  'path/to/image',  # Admin site background on login/logout pages (path to static should be specified)
-    'SHOW_THEMES':  True,  #  Show default admin themes button
-    'TRAY_REVERSE': True,  # Hide object-tools and additional-submit-line by default
-    'NAVBAR_REVERSE': True,  # Hide side navbar by default
-    'SHOW_COUNTS': True, # Show instances counts for each model
-    'APP_ICONS': {  # Set icons for applications(lowercase), including 3rd party apps, {'application_name': 'material_icon_name', ...}
-        'sites': 'send',
-    },
-    'MODEL_ICONS': {  # Set icons for models(lowercase), including 3rd party models, {'model_name': 'material_icon_name', ...}
-        'site': 'contact_mail',
-    }
-}
 
 
 # Internationalization
