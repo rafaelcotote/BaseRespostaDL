@@ -29,20 +29,67 @@ class Acessorio(models.Model):
     def __str__(self):
         return self.descricao
 
-class Oficios(models.Model):
+class Temes(models.Model):
 
-    oficios = models.CharField(max_length=50, null=False, verbose_name="Número do Ofício")
-    orgao = models.CharField(max_length=50, null=False, verbose_name="Órgão")
-    envio = models.DateField(null=False, verbose_name="Data do Envio")
-    temaofi = models.CharField(max_length=50, null=False, verbose_name="Tema do Ofício")
-    anexs = models.FileField(null=True, upload_to='anexooficio/')
-    questionamento = models.TextField(blank=True)
-    recebimento = models.DateField(null=False, verbose_name="Data do Recebimento")
-    conteudo = models.TextField(blank=True)
-    icon_name = 'description'
+    temm = models.CharField(max_length=50, null=False, blank=True, verbose_name="Tema")
+
+    class Meta:
+        db_table = "Temess"
+        verbose_name = "Tema"
 
     def __str__(self):
-        return self.temaofi
+        return self.temm
+
+class Oficios(models.Model):
+    OFICIO_CHOICES = [
+        ("ANVISA", "ANVISA"),
+        ("IBAMA", "IBAMA"),
+        ("CONAMA", "CONAMA"),
+        ("ANM", "ANM"),
+        ("MAPA", "MAPA"),
+        ("MTE", "MTE"),
+        ("CBM", "CBM"),
+    ]
+
+    OFICIO_STATUS = [
+        ("Aguardando Retorno", "Aguardando Retorno"),
+        ("Retorno Recebido", "Retorno Recebido"),
+    ]
+
+    #LISTA_TEMAS = [
+       # ("Emissões Atmosféricas", "Emissões Atmosféricas"),
+        #("Resíduos Solidos", "Resíduos Sólidos"),
+        #("Efluentes Líquidos", "Efluentes Líquidos"),
+        #("Fertilizantes", "Fertilizantes"),
+        #("Programa de Gerenciamento de Riscos - PGR", "Programa de Gerenciamento de Riscos - PGR"),
+    #]
+
+    responsavel_envio = models.CharField(max_length=50, null=False, verbose_name="Responsável pelo Envio")
+    status_oficio = models.CharField(max_length=50, null=False, choices=OFICIO_STATUS, verbose_name="Status do Ofício")
+    oficios = models.CharField(max_length=50, null=False, blank=True, verbose_name="Número do Ofício")
+    titulo_oficio = models.CharField(max_length=50, null=False, verbose_name="Título do Ofício")
+    orgao = models.CharField(max_length=50, null=False, choices=OFICIO_CHOICES, verbose_name="Órgão")
+    #temaofi = models.CharField(max_length=50, null=False, choices=LISTA_TEMAS, verbose_name="Tema do Ofício")
+    temm = models.ManyToManyField(Temes)
+    envio = models.DateField(null=False, verbose_name="Data do Envio")
+    questionamento = models.TextField(verbose_name="Questionamento")
+    conteudo = models.TextField(verbose_name="Resposta do Ofício")
+    anexs = models.FileField(null=False, blank=True, verbose_name="Anexo", upload_to='anexooficio/')
+    recebimento = models.DateField(null=True, blank=True, verbose_name="Data do Recebimento")
+    icon_name = 'description'
+
+    def get_temm(self):
+        return ",".join([str (p) for p in self.temm.all()])
+    def __unicode__(self):
+        return "{0}".format(self.oficios)
+
+    class Meta:
+        db_table = 'oficios'
+        verbose_name = 'Ofício'
+
+    def __str__(self):
+        return self.oficios
+
 
 class Consulta(models.Model):
 
@@ -82,6 +129,8 @@ class Veiculo(models.Model):
     tipo = models.CharField(max_length=10, choices=TIPO_CHOICES)
     proprietario = models.ForeignKey(Proprietario, on_delete=models.CASCADE)
     acessorios = models.ManyToManyField(Acessorio)
+    verbose_name = "Veículos"
+    icon_name = "markunread"
 
     def __str__(self):
         return self.modelo

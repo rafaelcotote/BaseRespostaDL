@@ -1,7 +1,8 @@
 from django.apps import AppConfig
 
-
 class AppConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'app'
-    icon_name = 'description'
+    verbose_name = "Ofícios DL"
+    icon_name = 'markunread'
+
