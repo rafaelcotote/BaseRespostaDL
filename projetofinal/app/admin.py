@@ -18,14 +18,15 @@ class TemesAdmin(admin.ModelAdmin):
     search_fields = ["orgao", "questionamento", "conteudo", "titulo_oficio", "status_oficio"]
     list_display = ["titulo_oficio", "oficios", "orgao", "status_oficio"]
     list_filter = ["orgao", "temaofi", "questionamento", "conteudo", "titulo_oficio", "status_oficio"]
-    icon_name = "list"
 
 class OficiosAdmin(ExportMixin, admin.ModelAdmin):
     Oficios = 'Ofício'
-    icon_name = 'markunread'
     list_display = ["titulo_oficio", "orgao", "get_temm", "status_oficio", "recebimento", "responsavel_envio"]
     list_filter = ["orgao", "status_oficio", "temm", "envio", "recebimento", "responsavel_envio"]
     search_fields = ["orgao", "questionamento", "conteudo", "titulo_oficio", "status_oficio"]
+    list_per_page = 10
+    icon_name = "file-alt"
+
 
     def get_export_formats(self):
         formats = (

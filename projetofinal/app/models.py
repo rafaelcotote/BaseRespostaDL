@@ -70,16 +70,17 @@ class Oficios(models.Model):
     titulo_oficio = models.CharField(max_length=50, null=False, verbose_name="Título do Ofício")
     orgao = models.CharField(max_length=50, null=False, choices=OFICIO_CHOICES, verbose_name="Órgão")
     #temaofi = models.CharField(max_length=50, null=False, choices=LISTA_TEMAS, verbose_name="Tema do Ofício")
-    temm = models.ManyToManyField(Temes)
+    temm = models.ManyToManyField(Temes, verbose_name = "Tema")
     envio = models.DateField(null=False, verbose_name="Data do Envio")
     questionamento = models.TextField(verbose_name="Questionamento")
-    conteudo = models.TextField(verbose_name="Resposta do Ofício")
+    conteudo = models.TextField(null=False, blank=True, verbose_name="Resposta do Ofício")
     anexs = models.FileField(null=False, blank=True, verbose_name="Anexo", upload_to='anexooficio/')
     recebimento = models.DateField(null=True, blank=True, verbose_name="Data do Recebimento")
-    icon_name = 'description'
+    icon_name = "file-alt"
 
     def get_temm(self):
         return ",".join([str (p) for p in self.temm.all()])
+
     def __unicode__(self):
         return "{0}".format(self.oficios)
 
